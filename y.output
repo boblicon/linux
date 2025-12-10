@@ -1,0 +1,381 @@
+Терминалы не используются в грамматике
+
+    NL
+
+
+Грамматика
+
+    0 $accept: cmd_line $end
+
+    1 cmd_line: ε
+    2         | EXIT
+    3         | EXIT STRING
+    4         | WAIT
+    5         | WAIT STRING
+    6         | KILL STRING
+    7         | DECLARE
+    8         | DECLARE STRING
+    9         | CD
+   10         | CD STRING
+   11         | PUSHD STRING
+   12         | POPD
+   13         | HELP
+   14         | HELP STRING
+   15         | pipeline background
+
+   16 background: BACKGROUND
+   17           | ε
+
+   18 simple: command redir
+
+   19 command: command STRING
+   20        | STRING
+
+   21 redir: input_redir output_redir
+
+   22 output_redir: OUTPUT_REDIR STRING
+   23             | ε
+
+   24 input_redir: INPUT_REDIR STRING
+   25            | ε
+
+   26 pipeline: pipeline PIPE simple
+   27         | simple
+
+
+Терминальные символы с правилами, в которых они появляются
+
+    $end (0) 0
+    error (256)
+    EXIT <string> (258) 2 3
+    WAIT <string> (259) 4 5
+    KILL <string> (260) 6
+    DECLARE <string> (261) 7 8
+    CD <string> (262) 9 10
+    PUSHD <string> (263) 11
+    POPD <string> (264) 12
+    HELP <string> (265) 13 14
+    PIPE <string> (266) 26
+    INPUT_REDIR <string> (267) 24
+    OUTPUT_REDIR <string> (268) 22
+    STRING <string> (269) 3 5 6 8 10 11 14 19 20 22 24
+    NL <string> (270)
+    BACKGROUND <string> (271) 16
+
+
+Нетерминальные символы с правилами, в которых они появляются
+
+    $accept (17)
+        on left: 0
+    cmd_line (18)
+        on left: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+        on right: 0
+    background (19)
+        on left: 16 17
+        on right: 15
+    simple (20)
+        on left: 18
+        on right: 26 27
+    command (21)
+        on left: 19 20
+        on right: 18 19
+    redir (22)
+        on left: 21
+        on right: 18
+    output_redir (23)
+        on left: 22 23
+        on right: 21
+    input_redir (24)
+        on left: 24 25
+        on right: 21
+    pipeline (25)
+        on left: 26 27
+        on right: 15 26
+
+
+State 0
+
+    0 $accept: • cmd_line $end
+
+    EXIT     сдвиг, и переход в состояние 1
+    WAIT     сдвиг, и переход в состояние 2
+    KILL     сдвиг, и переход в состояние 3
+    DECLARE  сдвиг, и переход в состояние 4
+    CD       сдвиг, и переход в состояние 5
+    PUSHD    сдвиг, и переход в состояние 6
+    POPD     сдвиг, и переход в состояние 7
+    HELP     сдвиг, и переход в состояние 8
+    STRING   сдвиг, и переход в состояние 9
+
+    $default  вывод с использованием правила 1 (cmd_line)
+
+    cmd_line  переход в состояние 10
+    simple    переход в состояние 11
+    command   переход в состояние 12
+    pipeline  переход в состояние 13
+
+
+State 1
+
+    2 cmd_line: EXIT •
+    3         | EXIT • STRING
+
+    STRING  сдвиг, и переход в состояние 14
+
+    $default  вывод с использованием правила 2 (cmd_line)
+
+
+State 2
+
+    4 cmd_line: WAIT •
+    5         | WAIT • STRING
+
+    STRING  сдвиг, и переход в состояние 15
+
+    $default  вывод с использованием правила 4 (cmd_line)
+
+
+State 3
+
+    6 cmd_line: KILL • STRING
+
+    STRING  сдвиг, и переход в состояние 16
+
+
+State 4
+
+    7 cmd_line: DECLARE •
+    8         | DECLARE • STRING
+
+    STRING  сдвиг, и переход в состояние 17
+
+    $default  вывод с использованием правила 7 (cmd_line)
+
+
+State 5
+
+    9 cmd_line: CD •
+   10         | CD • STRING
+
+    STRING  сдвиг, и переход в состояние 18
+
+    $default  вывод с использованием правила 9 (cmd_line)
+
+
+State 6
+
+   11 cmd_line: PUSHD • STRING
+
+    STRING  сдвиг, и переход в состояние 19
+
+
+State 7
+
+   12 cmd_line: POPD •
+
+    $default  вывод с использованием правила 12 (cmd_line)
+
+
+State 8
+
+   13 cmd_line: HELP •
+   14         | HELP • STRING
+
+    STRING  сдвиг, и переход в состояние 20
+
+    $default  вывод с использованием правила 13 (cmd_line)
+
+
+State 9
+
+   20 command: STRING •
+
+    $default  вывод с использованием правила 20 (command)
+
+
+State 10
+
+    0 $accept: cmd_line • $end
+
+    $end  сдвиг, и переход в состояние 21
+
+
+State 11
+
+   27 pipeline: simple •
+
+    $default  вывод с использованием правила 27 (pipeline)
+
+
+State 12
+
+   18 simple: command • redir
+   19 command: command • STRING
+
+    INPUT_REDIR  сдвиг, и переход в состояние 22
+    STRING       сдвиг, и переход в состояние 23
+
+    $default  вывод с использованием правила 25 (input_redir)
+
+    redir        переход в состояние 24
+    input_redir  переход в состояние 25
+
+
+State 13
+
+   15 cmd_line: pipeline • background
+   26 pipeline: pipeline • PIPE simple
+
+    PIPE        сдвиг, и переход в состояние 26
+    BACKGROUND  сдвиг, и переход в состояние 27
+
+    $default  вывод с использованием правила 17 (background)
+
+    background  переход в состояние 28
+
+
+State 14
+
+    3 cmd_line: EXIT STRING •
+
+    $default  вывод с использованием правила 3 (cmd_line)
+
+
+State 15
+
+    5 cmd_line: WAIT STRING •
+
+    $default  вывод с использованием правила 5 (cmd_line)
+
+
+State 16
+
+    6 cmd_line: KILL STRING •
+
+    $default  вывод с использованием правила 6 (cmd_line)
+
+
+State 17
+
+    8 cmd_line: DECLARE STRING •
+
+    $default  вывод с использованием правила 8 (cmd_line)
+
+
+State 18
+
+   10 cmd_line: CD STRING •
+
+    $default  вывод с использованием правила 10 (cmd_line)
+
+
+State 19
+
+   11 cmd_line: PUSHD STRING •
+
+    $default  вывод с использованием правила 11 (cmd_line)
+
+
+State 20
+
+   14 cmd_line: HELP STRING •
+
+    $default  вывод с использованием правила 14 (cmd_line)
+
+
+State 21
+
+    0 $accept: cmd_line $end •
+
+    $default  принять
+
+
+State 22
+
+   24 input_redir: INPUT_REDIR • STRING
+
+    STRING  сдвиг, и переход в состояние 29
+
+
+State 23
+
+   19 command: command STRING •
+
+    $default  вывод с использованием правила 19 (command)
+
+
+State 24
+
+   18 simple: command redir •
+
+    $default  вывод с использованием правила 18 (simple)
+
+
+State 25
+
+   21 redir: input_redir • output_redir
+
+    OUTPUT_REDIR  сдвиг, и переход в состояние 30
+
+    $default  вывод с использованием правила 23 (output_redir)
+
+    output_redir  переход в состояние 31
+
+
+State 26
+
+   26 pipeline: pipeline PIPE • simple
+
+    STRING  сдвиг, и переход в состояние 9
+
+    simple   переход в состояние 32
+    command  переход в состояние 12
+
+
+State 27
+
+   16 background: BACKGROUND •
+
+    $default  вывод с использованием правила 16 (background)
+
+
+State 28
+
+   15 cmd_line: pipeline background •
+
+    $default  вывод с использованием правила 15 (cmd_line)
+
+
+State 29
+
+   24 input_redir: INPUT_REDIR STRING •
+
+    $default  вывод с использованием правила 24 (input_redir)
+
+
+State 30
+
+   22 output_redir: OUTPUT_REDIR • STRING
+
+    STRING  сдвиг, и переход в состояние 33
+
+
+State 31
+
+   21 redir: input_redir output_redir •
+
+    $default  вывод с использованием правила 21 (redir)
+
+
+State 32
+
+   26 pipeline: pipeline PIPE simple •
+
+    $default  вывод с использованием правила 26 (pipeline)
+
+
+State 33
+
+   22 output_redir: OUTPUT_REDIR STRING •
+
+    $default  вывод с использованием правила 22 (output_redir)

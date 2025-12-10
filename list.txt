@@ -1,0 +1,22 @@
+итого 188
+drwxr-xr-x  3 brenevys brenevys  4096 дек 10 04:28 .
+drwx------ 21 brenevys brenevys  4096 дек 10 03:20 ..
+-rw-r--r--  1 brenevys brenevys  8851 дек 10 03:54 execute.c
+-rw-r--r--  1 brenevys brenevys 11528 ноя 12 12:14 execute.o
+-rw-r--r--  1 brenevys brenevys    36 ноя 12 12:06 first_files.txt
+-rw-r--r--  1 brenevys brenevys     0 дек 10 04:28 list.txt
+-rw-r--r--  1 brenevys brenevys  3307 ноя 12 12:06 main.c
+-rw-r--r--  1 brenevys brenevys  3952 ноя 12 12:07 main.o
+-rw-r--r--  1 brenevys brenevys   732 ноя 12 12:06 Makefile
+-rw-r--r--  1 brenevys brenevys  1862 ноя 12 12:06 parse.h
+-rw-r--r--  1 brenevys brenevys 18032 ноя 12 12:07 parse.o
+-rw-r--r--  1 brenevys brenevys  4022 ноя 12 12:06 parse.y
+-rw-r--r--  1 brenevys brenevys  1288 ноя 12 12:06 scan.l
+-rw-r--r--  1 brenevys brenevys 26344 ноя 12 12:07 scan.o
+-rwxr-xr-x  1 brenevys brenevys 48640 ноя 12 12:14 shell
+-rw-r--r--  1 brenevys brenevys  1354 ноя 12 12:06 Task4.cbp
+-rw-r--r--  1 brenevys brenevys     2 дек 10 04:01 test228.txt
+drwxr-xr-x  3 brenevys brenevys  4096 ноя 12 12:06 tests
+-rw-r--r--  1 brenevys brenevys    26 дек 10 04:25 test.txt
+-rw-r--r--  1 brenevys brenevys  8554 ноя 12 12:07 y.output
+-rw-r--r--  1 brenevys brenevys  3595 ноя 12 12:07 y.tab.h
